@@ -1,5 +1,3 @@
-//import { apiSettings } from './constants';
-
 class Api {
   constructor({baseUrl, headers}) {
     this._baseUrl = baseUrl;
@@ -57,7 +55,7 @@ class Api {
     .then(res => this._checkStatus(res));
   }
 
-  // Удаление с сервера новой карточки
+  // Удаление с сервера карточки
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
@@ -66,26 +64,19 @@ class Api {
     .then(res => this._checkStatus(res));
   }
 
-  // Добавление лайка карточке, отправка на сервер
-  putLike(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-    .then(res => this._checkStatus(res));
-  }
+  // Изменение статуса лайка карточке
+  changeLikeCardStatus(cardId, isLiked) {
+    let method = isLiked ? 'PUT' : 'DELETE';
 
-  // Снятие лайка с карточки
-  deleteLike(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: 'DELETE',
+      method: method,
       headers: this._headers
     })
     .then(res => this._checkStatus(res));
   }
 
   // Отправка на сервер нового аватара
-  updatetAvatar(avatarLink) {
+  updateAvatar(avatarLink) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,

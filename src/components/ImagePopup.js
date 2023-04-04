@@ -1,4 +1,6 @@
-function ImagePopup({card, onClose}) {
+import React from 'react';
+
+const ImagePopup = React.memo(({card, onClose}) => {
   return (
     <div className={`popup popup_type_img-open ${card ? "popup_opened" : ""}`}>
       <div className="popup__container popup__container_img">
@@ -10,6 +12,6 @@ function ImagePopup({card, onClose}) {
       </div>
     </div>
   );
-}
+});
 
 export default ImagePopup;
